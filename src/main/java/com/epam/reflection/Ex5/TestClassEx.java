@@ -14,5 +14,4 @@ public class TestClassEx {
     @ExceptionTest(RuntimeException.class)
     public void m3() {}
 
-
 }

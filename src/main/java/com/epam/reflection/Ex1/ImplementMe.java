@@ -4,7 +4,7 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
-class Main {
+class ImplementMe {
     public static void main(String[] args) throws ClassNotFoundException, InvocationTargetException, InstantiationException, IllegalAccessException, NoSuchMethodException {
         Class<?> trickyClass = Class.forName("com.epam.reflection.Ex1.Tricky");
         Constructor<?> constructor = trickyClass.getDeclaredConstructor(String.class);

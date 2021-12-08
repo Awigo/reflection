@@ -5,26 +5,27 @@ import java.lang.reflect.Method;
 
 class ReflectionTime {
 
-    public static void main(String[] args) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
-        SomeClass someClass = new SomeClass();
-        long num = 100_000_000;
+    public static void main(String[] args) throws ClassNotFoundException, InvocationTargetException, IllegalAccessException, NoSuchMethodException {
+        int TIMES = 100;
 
-        long start = System.nanoTime();
-        int result = someClass.someMethod(num);
-        long end = System.nanoTime();
-        long elapsedTimeInSecond = (end - start);
-        System.out.println(end);
-        System.out.println(start);
-        System.out.println("Result = " + result + " and time for calculation was :" + elapsedTimeInSecond);
+        long start1 = System.nanoTime();
+        for (int i = 0; i < TIMES; i++) {
+            calculate(i);
+        }
+        long stop1 = System.nanoTime();
+        System.out.println(stop1 - start1);
 
-        Method someMethod = someClass.getClass().getMethod("someMethod", long.class);
-        start = System.nanoTime();
-        result = (int) someMethod.invoke(null, num);
-        end = System.nanoTime();
-        elapsedTimeInSecond = end - start;
-        System.out.println(end);
-        System.out.println(start);
-        System.out.println("Result = " + result + " and time for calculation was :" + elapsedTimeInSecond);
+        Method method = Class.forName("com.epam.reflection.Ex2.ReflectionTime").getDeclaredMethod("calculate", int.class);
+        long start2 = System.nanoTime();
+        for (int i = 0; i < TIMES; i++) {
+            method.invoke(null, i);
+        }
+        long stop2 = System.nanoTime();
+        System.out.println(stop2 - start2);
+    }
+
+    public static int calculate(int i) {
+        return i % 15 == 3 ? i : i * 17;
     }
 }
 
